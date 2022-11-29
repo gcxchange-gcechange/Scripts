@@ -1,0 +1,37 @@
+##Enable site-template - only need if I need to create a template
+##Config Parameters
+#$AdminSiteURL="https://devgcx-admin.sharepoint.com"
+#$SiteURL="https://devgcx.sharepoint.com/teams/Template-Site"
+  
+##Get Credentials to connect
+  
+##Connect to SharePoint Online Tenant Admin
+Connect-SPOService -URL $AdminSiteURL
+  
+##Disable DenyAddAndCustomizePages Flag
+#Set-SPOSite $SiteURL -DenyAddAndCustomizePages $False
+
+##Run script to create xml file
+##Set variables
+$SiteURL = "https://devgcx.sharepoint.com/teams/Template-Site"
+$SchmaXMLPath = "local_path\template.xml"
+ 
+##Connect to PnP Online
+Connect-PnPOnline -Url $siteUrl -Interactive
+ 
+##Get Site Schema
+Get-PnPSiteTemplate -Out ($SchmaXMLPath) -PersistBrandingFiles -IncludeAllClientSidePages
+
+##Apply template
+##Config Variables
+#$SiteURL = "https://devgcx.sharepoint.com/teams/Template-Site"
+#$TemplateXML ="local_path\template.xml"
+  
+##Connect to PnP Online
+#Connect-PnPOnline -Url $SiteURL -Interactive
+ 
+##Apply provisioning Template
+#Invoke-PnPSiteTemplate -path $TemplateXML -ClearNavigation
+
+
+#Read more: https://www.sharepointdiary.com/2019/06/sharepoint-online-apply-theme-using-pnp-provisioning-template.html#ixzz7WOwRqmEF
